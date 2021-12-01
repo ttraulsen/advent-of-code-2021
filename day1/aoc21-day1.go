@@ -50,18 +50,18 @@ func readCompleteFile(fileName string) []string{
 	return strings.Split(string(fileBytes), "\n")
 }
 
-func addElements(lines []string,offset int)int64{
-	i,_:= strconv.ParseInt(lines[offset],10,64)
-	j,_:= strconv.ParseInt(lines[offset+1],10,64)
-	k,_:= strconv.ParseInt(lines[offset+2],10,64)
-	return i+j+k
-}
+// func addElements(lines []string,offset int)int64{
+//	i,_:= strconv.ParseInt(lines[offset],10,64)
+//	j,_:= strconv.ParseInt(lines[offset+1],10,64)
+//	k,_:= strconv.ParseInt(lines[offset+2],10,64)
+//	return i+j+k
+//}
 
 func task2 (fileName string) {
 	var lines = readCompleteFile(fileName)
 	var increments=0
 	for i:=0; i<len(lines)-3;i++ {
-		if(addElements(lines,i+1) > addElements(lines,i)){
+		if(lines[i+3] > lines[i]){
 			increments++
 		}
 	}
