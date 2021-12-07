@@ -42,15 +42,6 @@ func readInitialSetup(s string)[]int64{
 	return ret
 }
 
-func readOptimizedSetup(s string) (ret [9]int64){
-	tokens := strings.Split(s,",")
-	for _, v := range tokens {
-		i,_ := strconv.ParseInt(v,10,64)
-		ret[i]++
-	}	
-	return
-}
-
 
 func task1 (fileName string) {
 	lines := readCompleteFile(fileName)
