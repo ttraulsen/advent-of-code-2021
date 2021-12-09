@@ -95,31 +95,20 @@ func task1 (fileName string) {
 	fmt.Printf("Sum of minimums %v\n",sumOfMinimums)
 }
 
-type minimum struct {
-	x int
-	y int
-	id int
-}
-
 func task2 (fileName string) {
 	myMap := *(readMap(readCompleteFile(fileName)))
 	coloredMap := *(readColoredMap(readCompleteFile(fileName)))
 	
-	var listOfMinimums = []minimum{}
-
 	var id = 1
 
 	for x := 0; x < len(myMap); x++ {
 		for y := 0; y < len(myMap[x]);y++ {
 			if(isLocalMinimum(&myMap,x,y)){
-				var localMinimum = minimum{x,y,id}
-				listOfMinimums = append(listOfMinimums,localMinimum)
 				coloredMap[x][y] = int64(id)
 				id++
 			}
 		}
 	}
-
 
 	for {
 		hasColored := false
@@ -173,8 +162,6 @@ func task2 (fileName string) {
 	}
 
 	sort.Sort(sort.Reverse(sort.IntSlice(values)))
-
-	fmt.Printf("Basin sizes %v\n",values)
 
 	fmt.Printf("Answer to task2 is %v\n",values[0]*values[1]*values[2])
 }
