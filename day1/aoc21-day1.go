@@ -1,24 +1,24 @@
 package main
 
 import (
-  "bufio"
-  "fmt"
-  "io/ioutil"
+	"bufio"
+	"fmt"
+	"io/ioutil"
+	"os"
 	"strconv"
-  "os"
 	"strings"
 )
 
 func check(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
 
-func task1 (fileName string) {
+func task1(fileName string) {
 	pwd, _ := os.Getwd()
 	f, err := os.Open(pwd + "/" + fileName)
-  check(err)
+	check(err)
 
 	scanner := bufio.NewScanner(f)
 
@@ -28,20 +28,20 @@ func task1 (fileName string) {
 
 	for scanner.Scan() {
 		var line = scanner.Text()
-		currentLine,_ = strconv.ParseInt(line,10,64)
+		currentLine, _ = strconv.ParseInt(line, 10, 64)
 		//fmt.Println(line)
-		if(lastLine != -1){
-			if(lastLine < currentLine) {
+		if lastLine != -1 {
+			if lastLine < currentLine {
 				increments++
 			}
 		}
 		lastLine = currentLine
-  }
-	fmt.Printf("Number of increments in %v: %v\n",fileName,increments)
+	}
+	fmt.Printf("Number of increments in %v: %v\n", fileName, increments)
 
 }
 
-func readCompleteFile(fileName string) []string{
+func readCompleteFile(fileName string) []string {
 	pwd, _ := os.Getwd()
 
 	fileBytes, err := ioutil.ReadFile(pwd + "/" + fileName)
@@ -50,15 +50,15 @@ func readCompleteFile(fileName string) []string{
 	return strings.Split(string(fileBytes), "\n")
 }
 
-func task2 (fileName string) {
+func task2(fileName string) {
 	var lines = readCompleteFile(fileName)
-	var increments=0
-	for i:=0; i<len(lines)-3;i++ {
-		if(lines[i+3] > lines[i]){
+	var increments = 0
+	for i := 0; i < len(lines)-3; i++ {
+		if lines[i+3] > lines[i] {
 			increments++
 		}
 	}
-	fmt.Printf("Number of measured increments in %v: %v\n",fileName,increments)
+	fmt.Printf("Number of measured increments in %v: %v\n", fileName, increments)
 }
 
 func main() {

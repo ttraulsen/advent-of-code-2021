@@ -1,20 +1,20 @@
 package main
 
 import (
-  "fmt"
-  "io/ioutil"
+	"fmt"
+	"io/ioutil"
+	"os"
 	"strconv"
-  "os"
 	"strings"
 )
 
 func check(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
 
-func task1 (fileName string) {
+func task1(fileName string) {
 
 	var lines = readCompleteFile(fileName)
 	var horizontal int64 = 0
@@ -22,10 +22,10 @@ func task1 (fileName string) {
 
 	for _, line := range lines {
 		var splitLine = strings.Split(line, " ")
-		if(len(splitLine)<2){
+		if len(splitLine) < 2 {
 			continue
 		}
-		var value,_ = strconv.ParseInt(splitLine[1], 10, 64)
+		var value, _ = strconv.ParseInt(splitLine[1], 10, 64)
 		switch splitLine[0] {
 		case "forward":
 			horizontal = horizontal + value
@@ -34,15 +34,15 @@ func task1 (fileName string) {
 		case "up":
 			depth = depth - value
 		default:
-			fmt.Printf("Error while reading line %v\n",line)
+			fmt.Printf("Error while reading line %v\n", line)
 		}
 	}
 
-	fmt.Printf("With file %v - horizontal: %v, depth: %v, product: %v\n",fileName,horizontal,depth,horizontal*depth)
+	fmt.Printf("With file %v - horizontal: %v, depth: %v, product: %v\n", fileName, horizontal, depth, horizontal*depth)
 
 }
 
-func task2 (fileName string) {
+func task2(fileName string) {
 
 	var lines = readCompleteFile(fileName)
 	var horizontal int64 = 0
@@ -51,10 +51,10 @@ func task2 (fileName string) {
 
 	for _, line := range lines {
 		var splitLine = strings.Split(line, " ")
-		if(len(splitLine)<2){
+		if len(splitLine) < 2 {
 			continue
 		}
-		var value,_ = strconv.ParseInt(splitLine[1], 10, 64)
+		var value, _ = strconv.ParseInt(splitLine[1], 10, 64)
 		switch splitLine[0] {
 		case "forward":
 			horizontal = horizontal + value
@@ -64,15 +64,15 @@ func task2 (fileName string) {
 		case "up":
 			aim = aim - value
 		default:
-			fmt.Printf("Error while reading line %v\n",line)
+			fmt.Printf("Error while reading line %v\n", line)
 		}
 	}
 
-	fmt.Printf("With file %v - horizontal: %v, depth: %v, aim: %v, product: %v\n",fileName,horizontal,depth,aim,horizontal*depth)
+	fmt.Printf("With file %v - horizontal: %v, depth: %v, aim: %v, product: %v\n", fileName, horizontal, depth, aim, horizontal*depth)
 
 }
 
-func readCompleteFile(fileName string) []string{
+func readCompleteFile(fileName string) []string {
 	pwd, _ := os.Getwd()
 
 	fileBytes, err := ioutil.ReadFile(pwd + "/" + fileName)
@@ -80,7 +80,6 @@ func readCompleteFile(fileName string) []string{
 
 	return strings.Split(string(fileBytes), "\n")
 }
-
 
 func main() {
 	task1("testdata.txt")
